@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/usr/local/bin/letsencrypt certonly --standalone --agree-tos -n --register-unsafely-without-email --keep-until-expiring --no-self-upgrade  {%- for domain in pillar['secrets']['letsencrypt']['environments']['%s' % salt['grains.get']('environment','None')]['domains'] %} -d {{ domain }} {%- endfor -%}
+/usr/local/bin/letsencrypt certonly --standalone --agree-tos -n --register-unsafely-without-email --allow-subset-of-names --keep-until-expiring --no-self-upgrade  {%- for domain in pillar['secrets']['letsencrypt']['environments']['%s' % salt['grains.get']('environment','None')]['domains'] %} -d {{ domain }} {%- endfor -%}
