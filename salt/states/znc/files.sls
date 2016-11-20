@@ -29,6 +29,8 @@ include:
         - group: ec2-user
         - mode: 700
         - makedirs: True
+        - require:
+            - file: /home/ec2-user/.znc/configs/znc.conf:
 
 /home/ec2-user/.znc/users/{{ user }}/networks/{{ network }}/moddata/sasl/.registry:
     file.managed:
@@ -41,6 +43,8 @@ include:
         - user: ec2-user
         - group: ec2-user
         - mode: 600
+        - require:
+            - file: /home/ec2-user/.znc/users/{{ user }}/networks/{{ network }}/moddata/sasl
 {% endfor %}
 {% endfor %}
 
