@@ -8,7 +8,7 @@ include:
         - mode: 755
         - makedirs: True
         - require:
-            sls: znc.source
+            - sls: znc.source
 
 /home/ec2-user/.znc/configs/znc.conf:
     file.managed:
@@ -17,5 +17,5 @@ include:
     - user: ec2-user
     - group: ec2-user
     - mode: 600
-    - requires:
+    - require:
         - file: /home/ec2-user/.znc/configs
