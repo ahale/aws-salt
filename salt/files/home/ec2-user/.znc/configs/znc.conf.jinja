@@ -8,16 +8,16 @@
 // But if you feel risky, you might want to read help on /znc saveconfig and /znc rehash.
 // Also check http://en.znc.in/wiki/Configuration
 
-AnonIPLimit = 10
-ConnectDelay = 5
-HideVersion = false
-MaxBufferSize = 500
-ProtectWebSessions = true
-SSLCertFile = /home/ec2-user/.znc/znc.pem
-ServerThrottle = 30
-Skin = _default_
-StatusPrefix = *
-Version = 1.6.3
+AnonIPLimit = {{ pillar['secrets']['znc']['global']['anoniplimit'] }}
+ConnectDelay = {{ pillar['secrets']['znc']['global']['connectdelay'] }}
+HideVersion = {{ pillar['secrets']['znc']['global']['hideversion'] }}
+MaxBufferSize = {{ pillar['secrets']['znc']['global']['maxbuffersize'] }}
+ProtectWebSessions = {{ pillar['secrets']['znc']['global']['protectwebsessions'] }}
+SSLCertFile = {{ pillar['secrets']['znc']['global']['sslcertfile'] }}
+ServerThrottle = {{ pillar['secrets']['znc']['global']['serverthrottle'] }}
+Skin = {{ pillar['secrets']['znc']['global']['skin'] }}
+StatusPrefix = {{ pillar['secrets']['znc']['global']['statusprefix'] }}
+Version = {{ pillar['secrets']['znc']['global']['version'] }}
 
 <Listener l>
 	AllowIRC = {{ pillar['secrets']['znc']['listener']['allowirc'] }}

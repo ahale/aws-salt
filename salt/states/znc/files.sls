@@ -32,14 +32,15 @@ include:
 
 /home/ec2-user/.znc/users/{{ user }}/networks/{{ network }}/moddata/sasl/.registry:
     file.managed:
+        - source: salt://home/ec2-user/.znc/sasl.jinja
+        - template: jinja
         - context:
             mechanisms: {{ pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['sasl']['mechanisms'] }}
             password: {{ pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['sasl']['password'] }}
             username: {{ pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['sasl']['username'] }}
         - user: ec2-user
         - group: ec2-user
-        - mode: 700
-        - makedirs: True
+        - mode: 600
 {% endfor %}
 {% endfor %}
 
