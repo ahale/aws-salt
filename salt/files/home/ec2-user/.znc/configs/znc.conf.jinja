@@ -8,8 +8,21 @@
 // But if you feel risky, you might want to read help on /znc saveconfig and /znc rehash.
 // Also check http://en.znc.in/wiki/Configuration
 
+AnonIPLimit = 10
+ConnectDelay = 5
+HideVersion = false
+MaxBufferSize = 500
+ProtectWebSessions = true
+SSLCertFile = /home/ec2-user/.znc/znc.pem
+ServerThrottle = 30
+Skin = _default_
+StatusPrefix = *
 Version = 1.6.3
+
 <Listener l>
+	AllowIRC = {{ pillar['secrets']['znc']['listener']['allowirc'] }}
+	AllowWeb = {{ pillar['secrets']['znc']['listener']['allowweb'] }}
+	URIPrefix = {{ pillar['secrets']['znc']['listener']['uriprefix'] }}
 	Port = {{ pillar['secrets']['znc']['listener']['port'] }}
 	IPv4 = {{ pillar['secrets']['znc']['listener']['ipv4'] }}
 	IPv6 = {{ pillar['secrets']['znc']['listener']['ipv6'] }}
@@ -23,8 +36,22 @@ LoadModule = {{ module }}
 <User {{ user }}>
     Pass       = {{ pillar['secrets']['znc']['users']['%s' % user]['pass'] }}
     Admin      = {{ pillar['secrets']['znc']['users']['%s' % user]['admin'] }}
+	AltNick    = {{ pillar['secrets']['znc']['users']['%s' % user]['altnick'] }}
+	AppendTimestamp = {{ pillar['secrets']['znc']['users']['%s' % user]['appendtimestamp'] }}
+	AutoClearChanBuffer = {{ pillar['secrets']['znc']['users']['%s' % user]['autoclearchanbuffer'] }}
+	AutoClearQueryBuffer = {{ pillar['secrets']['znc']['users']['%s' % user]['autoclearquerybuffer'] }}
+	Buffer = {{ pillar['secrets']['znc']['users']['%s' % user]['buffer'] }}
+	DenyLoadMod = {{ pillar['secrets']['znc']['users']['%s' % user]['denyloadmod'] }}
+	DenySetBindHost = {{ pillar['secrets']['znc']['users']['%s' % user]['denysetbindhost'] }}
+	JoinTries = {{ pillar['secrets']['znc']['users']['%s' % user]['jointries'] }}
+	MaxJoins = {{ pillar['secrets']['znc']['users']['%s' % user]['maxjoins'] }}
+	MaxNetworks = {{ pillar['secrets']['znc']['users']['%s' % user]['maxnetworks'] }}
+	MaxQueryBuffers = {{ pillar['secrets']['znc']['users']['%s' % user]['maxquerybuffers'] }}
+	MultiClients = {{ pillar['secrets']['znc']['users']['%s' % user]['multiclients'] }}
+	PrependTimestamp = {{ pillar['secrets']['znc']['users']['%s' % user]['prependtimestamp'] }}
+	QuitMsg = {{ pillar['secrets']['znc']['users']['%s' % user]['quitmsg'] }}
+	TimestampFormat = {{ pillar['secrets']['znc']['users']['%s' % user]['timestampformat'] }}
     Nick       = {{ pillar['secrets']['znc']['users']['%s' % user]['nick'] }}
-    AltNick    = {{ pillar['secrets']['znc']['users']['%s' % user]['altnick'] }}
     Ident      = {{ pillar['secrets']['znc']['users']['%s' % user]['ident'] }}
     RealName   = {{ pillar['secrets']['znc']['users']['%s' % user]['realname'] }}
     {%- for module in pillar['secrets']['znc']['users']['%s' % user]['modules'] %}
