@@ -1,2 +1,2 @@
 include:
-  - znc.files
+  - znc.source

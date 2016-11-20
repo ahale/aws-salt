@@ -15,6 +15,7 @@ znc_packages:
         - mode: 644
         - require:
             - pkg: znc_packages
+        - unless: test -x /usr/local/bin/znc
 
 untar_source:
     cmd:
@@ -23,6 +24,7 @@ untar_source:
         - cwd: /root/
         - require:
             - file: /root/znc-1.6.3.tar.gz
+        - unless: test -x /usr/local/bin/znc
 
 configure_source:
     cmd:
@@ -31,6 +33,7 @@ configure_source:
         - cwd: /root/znc-1.6.3/
         - require:
             - cmd: untar_source
+        - unless: test -x /usr/local/bin/znc
 
 make_from_source:
     cmd:
@@ -39,6 +42,7 @@ make_from_source:
         - cwd: /root/znc-1.6.3/
         - require:
             - cmd: configure_source
+        - unless: test -x /usr/local/bin/znc
 
 make_install:
     cmd:
@@ -47,3 +51,4 @@ make_install:
         - cwd: /root/znc-1.6.3/
         - require:
             - cmd: make_from_source
+        - unless: test -x /usr/local/bin/znc
