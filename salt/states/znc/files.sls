@@ -23,7 +23,7 @@ include:
 
 {% for user in pillar['secrets']['znc']['users'] %}
 {% for network in pillar['secrets']['znc']['users']['%s' % user]['networks'] %}
-{% if {{ pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['sasl'] is defined %}
+{% if pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['sasl'] is defined %}
 /home/ec2-user/.znc/users/{{ user }}/networks/{{ network }}/moddata/sasl:
     file.directory:
         - user: ec2-user
