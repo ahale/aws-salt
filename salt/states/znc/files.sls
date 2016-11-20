@@ -1,4 +1,5 @@
-include: znc.source
+include:
+    - znc.source
 
 /home/ec2-user/.znc/configs:
     file.directory:
