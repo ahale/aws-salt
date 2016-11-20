@@ -12,6 +12,13 @@ letsencrypt_pip:
         - group: root
         - mode: 755
 
+/root/makepem.sh:
+    file.managed:
+        - source: salt://root/makepem.sh.jinja
+        - template: jinja
+        - user: root
+        - group: root
+        - mode: 755
 
 /etc/cron.d/letsencrypt:
     file.managed:
@@ -30,3 +37,11 @@ generate_certs_onetime:
         - require:
             - file: /etc/cron.d/letsencrypt
         - unless: test -d /etc/letsencrypt/live
+
+generate_pem:
+    cmd:
+        - run
+        - name: sh /root/makepem.sh
+        - require:
+            - file: /root/makepem.sh
+        - onlyif: test -d /etc/letsencrypt/live    

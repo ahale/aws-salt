@@ -1,0 +1,5 @@
+#!/bin/bash
+
+{% for domain in pillar['secrets']['letsencrypt']['environments']['%s' % salt['grains.get']('environment','None')]['domains'] %}
+cat /etc/letsencrypt/live/{{ domain }}/{privkey,cert,chain}.pem > /etc/letsencrypt/{{ domain }}.pem 2>/dev/null
+{% endfor %}

@@ -1,5 +1,6 @@
 include:
     - znc.source
+    - common.letsencrypt
 
 /home/ec2-user/.znc/configs:
     file.directory:
@@ -19,3 +20,10 @@ include:
     - mode: 600
     - require:
         - file: /home/ec2-user/.znc/configs
+
+/home/ec2-user/.znc/znc.pem:
+    cmd:
+        - run
+        - name: sh /root/zncpem.sh
+        - require:
+            - sls: common.letsencrypt
