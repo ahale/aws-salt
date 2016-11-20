@@ -20,11 +20,13 @@ letsencrypt_pip:
         - user: root
         - group: root
         - mode: 644
+        - require:
+            - file: /root/letsencrypt.sh
 
 generate_certs_onetime:
     cmd:
         - run
-        - name: sh /etc/cron.d/letsencrypt
+        - name: sh /root/letsencrypt.sh
         - require:
             - file: /etc/cron.d/letsencrypt
         - unless: test -d /etc/letsencrypt/live
