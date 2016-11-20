@@ -1,0 +1,1 @@
+1 * * * * root salt-call --local state.highstate >/dev/null
