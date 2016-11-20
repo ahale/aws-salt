@@ -30,7 +30,7 @@ include:
         - mode: 700
         - makedirs: True
         - require:
-            - file: /home/ec2-user/.znc/configs/znc.conf:
+            - file: /home/ec2-user/.znc/configs/znc.conf
 
 /home/ec2-user/.znc/users/{{ user }}/networks/{{ network }}/moddata/sasl/.registry:
     file.managed:
