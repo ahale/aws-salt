@@ -10,3 +10,4 @@ run_process:
         - runas: ec2-user
         - require:
             - sls: znc.files
+        - unless: ps auxfw| grep 'z[n]c' >/dev/null
