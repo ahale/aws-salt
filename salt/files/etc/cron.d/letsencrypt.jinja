@@ -1,1 +1,0 @@
-1 * * * 0 root /usr/local/bin/letsencrypt certonly --standalone --agree-tos -n --register-unsafely-without-email --keep-until-expiring --no-self-upgrade  {%- for domain in pillar['secrets']['letsencrypt']['environments']['%s' % salt['grains.get']('environment','None')]['domains'] %} -d {{ domain }} {%- endfor -%} >/dev/null

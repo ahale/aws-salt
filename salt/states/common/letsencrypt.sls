@@ -4,9 +4,18 @@ letsencrypt_pip:
         - pkgs:
             - letsencrypt
 
+/root/letsencrypt.sh:
+    file.managed:
+        - source: salt://root/letsencrypt.sh.jinja
+        - template: jinja
+        - user: root
+        - group: root
+        - mode: 755
+
+
 /etc/cron.d/letsencrypt:
     file.managed:
-        - source: salt://etc/cron.d/letsencrypt.jinja
+        - source: salt://etc/cron.d/letsencrypt
         - template: jinja
         - user: root
         - group: root
