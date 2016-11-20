@@ -16,7 +16,7 @@ Version = 1.6.3
 	SSL = {{ pillar['secrets']['znc']['listener']['ssl'] }}
 </Listener>
 {%- for module in pillar['secrets']['znc']['global']['modules'] %}
-LoadModule {{ module }}
+LoadModule = {{ module }}
 {%- endfor %}
 
 {%- for user in pillar['secrets']['znc']['users'] %}
@@ -28,12 +28,12 @@ LoadModule {{ module }}
     Ident      = {{ pillar['secrets']['znc']['users']['%s' % user]['ident'] }}
     RealName   = {{ pillar['secrets']['znc']['users']['%s' % user]['realname'] }}
     {%- for module in pillar['secrets']['znc']['users']['%s' % user]['modules'] %}
-    LoadModule {{ module }}
+    LoadModule = {{ module }}
     {%- endfor %}
     {%- for network in pillar['secrets']['znc']['users']['%s' % user]['networks'] %}
     <Network {{ network }}>
         {%- for module in pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['modules'] %}
-        LoadModule {{ module }}
+        LoadModule = {{ module }}
         {%- endfor %}
         Server     = {{ pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['server'] }}
         {%- for channel in pillar['secrets']['znc']['users']['%s' % user]['networks']['%s' % network]['channels'] %}
