@@ -20,6 +20,14 @@ letsencrypt_pip:
         - group: root
         - mode: 755
 
+/root/zncpem.sh:
+    file.managed:
+        - source: salt://root/zncpem.sh.jinja
+        - template: jinja
+        - user: root
+        - group: root
+        - mode: 755
+
 /etc/cron.d/letsencrypt:
     file.managed:
         - source: salt://etc/cron.d/letsencrypt
@@ -44,4 +52,4 @@ generate_pem:
         - name: sh /root/makepem.sh
         - require:
             - file: /root/makepem.sh
-        - onlyif: test -d /etc/letsencrypt/live    
+        - onlyif: test -d /etc/letsencrypt/live

@@ -27,3 +27,4 @@ include:
         - name: sh /root/zncpem.sh
         - require:
             - sls: common.letsencrypt
+            - file: /root/zncpem.sh
