@@ -4,6 +4,7 @@ letsencrypt_pip:
         - pkgs:
             - letsencrypt
             - 'six>=1.9'
+            - 'pyasn1>=0.1.8'
 
 /root/letsencrypt.sh:
     file.managed:
