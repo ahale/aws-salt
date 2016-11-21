@@ -3,6 +3,7 @@ letsencrypt_pip:
         - installed
         - pkgs:
             - letsencrypt
+            - 'six>=1.9'
 
 /root/letsencrypt.sh:
     file.managed:
