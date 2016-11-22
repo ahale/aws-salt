@@ -48,4 +48,9 @@ echo -e 'host *\n    StrictHostKeyChecking no' > /root/.ssh/config
 chmod -R 600 /root/.ssh
 
 salt-call saltutil.sync_grains
+
+instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+eip_id=$(sudo salt-call pillar.fetch networking:tools:elastic_ip_id --out=txt | awk -F': ' '{print $2}')
+aws ec2 associate-address --region eu-west-1 --instance-id ${instance_id} --allocation-id ${eip_id}
+
 salt-call --local -l debug  state.highstate

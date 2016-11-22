@@ -1,0 +1,67 @@
+secrets:
+    letsencrypt:
+        environments:
+            $ENVIRONMENT_FROM_VPC_PREFIX:
+                domains:
+                    - $SSL_HOSTNAME
+
+    znc:
+        global:
+            sslcertfile: $ZNC_CERT_PEM_FILE
+            version: $ZNC_VERSION
+            maxbuffersize: $GLOBAL_MAX_BUFFER
+            skin: '_default_'
+            statusprefix: '*'
+            protectwebsessions: 'true|false'
+            hideversion: 'true|false'
+            serverthrottle: 30
+            anoniplimit: 10
+            connectdelay: 5
+            modules:
+                - log
+        listener:
+            port: $LISTEN_PORT
+            cert: $SSL_HOSTNAME
+            uriprefix: '/'
+            ipv4: 'true|false'
+            ipv6: 'true|false'
+            ssl: 'true|false'
+            allowirc: 'true|false'
+            allowweb: 'true|false'
+        users:
+            $USER:
+                pass: $SHA_PASSWORD_STRING
+                nick: $NICK
+                altnick: $ALTNICK
+                ident: $IDENT
+                realname: $REALNAME
+                buffer: $BUFFER
+                quitmsg: '%znc%'
+                timestampformat: '[%H:%M:%S]'
+                admin: 'true|false'
+                appendtimestamp: 'true|false'
+                autoclearchanbuffer: 'true|false'
+                autoclearquerybuffer: 'true|false'
+                denyloadmod: 'true|false'
+                denysetbindhost: 'true|false'
+                multiclients: 'true|false'
+                prependtimestamp: 'true|false'
+                jointries: 10
+                maxjoins: 0
+                maxnetworks: 1
+                maxquerybuffers: 50
+                modules:
+                    - chansaver
+                networks:
+                    freenode:
+                        server: $HOST $PORT
+                        modules:
+                            - simple_away
+                            - sasl
+                        channels:
+                            - $CHANNEL_ONE
+                            - $CHANNEL_TWO
+                        sasl:
+                            mechanisms: $SASL_MECHANISM
+                            password: $SASL_PASS
+                            username: $SASL_USER
